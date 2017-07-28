@@ -1,7 +1,11 @@
+/* eslint-disable comma-dangle */
+
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const HtmlWebpackPlugin  = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
+
+const nodeEnv = process.env.NODE_ENV || 'production';
 
 module.exports = {
   entry: {
@@ -17,10 +21,18 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use:  [
+        use: [
           'style-loader',
           'css-loader'
         ]
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015-native-modules']
+        }
       }
     ]
   },
@@ -29,7 +41,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Output Mgmt'
     }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    // env plugin
+    new webpack.DefinePlugin({
+      'process.env': { NODE_ENV: JSON.stringify(nodeEnv) }
+    })
   ],
   output: {
     filename: '[name].bundle.js',

@@ -1,0 +1,13 @@
+# -*- mode: json -*
+# vi: set ft=ruby :
+{
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true,
+  },
+  "extends": "airbnb",
+  "rules": {
+    "no-console": "warn",
+  }
+}
