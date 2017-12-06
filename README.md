@@ -24,5 +24,4 @@ is to use the guide everywhere I write Javascript.
 ### How about running with a browser?
 
 This worked before:
-npm install browser-sync
-browser-sync --directory-server --files *.js *.html *.css
+npm install browser-sync --directory-server --files *.js *.html *.css
